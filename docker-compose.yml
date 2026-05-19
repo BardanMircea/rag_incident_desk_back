@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    container_name: rag-pgvector
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: incident_desk
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - rag_pg_data:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+
+volumes:
+  rag_pg_data:
