@@ -38,7 +38,6 @@ public class DocumentIngestionService {
         // 2. Load PDF into LangChain4j Document object
         Document document = new ApachePdfBoxDocumentParser().parse(file.getInputStream());
 
-        // Put SQL id on the DOCUMENT metadata (it will be copied to each TextSegment automatically)
         document.metadata().put("source_document_id", savedDoc.getId());
 
         System.out.println("inside ingestion service, begin ingest document");

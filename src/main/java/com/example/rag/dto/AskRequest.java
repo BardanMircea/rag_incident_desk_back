@@ -1,4 +1,3 @@
 package com.example.rag.dto;
 
-public class AskRequest {
-}
+public record AskRequest(String question) {}
