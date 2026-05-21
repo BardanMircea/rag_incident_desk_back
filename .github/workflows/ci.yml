@@ -20,7 +20,7 @@ jobs:
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         options: >-
-          --health-cmd="pg_isready -U ${{ secrets.POSTGRES_USER }} -d ${{ secrets.POSTGRES_DB }}"
+          --health-cmd="pg_isready -U POSTGRES_USER -d POSTGRES_DB"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -39,7 +39,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y postgresql-client
-          PGPASSWORD=${{ secrets.POSTGRES_PASSWORD }} psql -h localhost -p 5433 -U user -d incident_desk -c "CREATE EXTENSION IF NOT EXISTS vector;"
+          PGPASSWORD=POSTGRES_PASSWORD psql -h localhost -p 5433 -U POSTGRES_USER -d POSTGRES_DB -c "CREATE EXTENSION IF NOT EXISTS vector;"
 
       - name: Run Checkstyle
         run: mvn checkstyle:check
